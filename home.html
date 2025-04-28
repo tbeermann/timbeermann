@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinitely Simple Life - Home Enhanced</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <style>
+        /* Style for the fading tagline */
+        #fading-tagline {
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            min-height: 1.5em; /* Prevent layout shift */
+        }
+        #fading-tagline.visible {
+            opacity: 1;
+        }
+        /* Ensure body takes full height for gradient */
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="animated-gradient text-gray-800 font-inter">
+
+    <div class="flex flex-col min-h-screen">
+
+        <!-- Header slightly transparent for gradient background -->
+        <header class="py-6 px-4 sm:px-6 lg:px-8 bg-white/20 backdrop-blur-sm sticky top-0 z-10">
+            <div class="container mx-auto text-center sm:text-left">
+                <h1 class="text-2xl font-semibold text-gray-700">Infinitely Simple Life</h1>
+            </div>
+        </header>
+
+        <main class="flex-grow flex items-center justify-center px-4 sm:px-6 lg:px-8">
+            <div class="container mx-auto text-center py-16">
+
+                <div class="max-w-3xl mx-auto mb-16" id="main-text-block">
+                    <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 leading-tight text-gray-700">
+                        Discover Infinite Simplicity.
+                    </h2>
+                    <p class="text-lg sm:text-xl text-gray-600 mb-4">
+                        Imagine a life where complexity fades away, managed effortlessly, freeing you to focus on what truly matters.
+                    </p>
+                     <p id="fading-tagline" class="text-lg sm:text-xl text-gray-500 h-8">&nbsp;</p>
+                </div>
+
+                <div id="explore" class="max-w-4xl mx-auto">
+                    <h3 class="text-2xl font-semibold mb-8 text-gray-700">Explore the Possibilities:</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                        <a href="pages/automation.html" class="link-card block p-6 rounded-xl shadow bg-white/40 backdrop-blur-sm text-left transition duration-500 ease-in-out hover:shadow-lg hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold mb-2 text-blue-700">Effortless Automation</h4>
+                            <p class="text-gray-600">Let technology handle the mundane. See how smart tools can streamline your daily tasks and decisions.</p>
+                        </a>
+
+                        <a href="pages/clarity-focus.html" class="link-card block p-6 rounded-xl shadow bg-white/40 backdrop-blur-sm text-left transition duration-500 ease-in-out hover:shadow-lg hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold mb-2 text-green-700">Find Your Focus</h4>
+                            <p class="text-gray-600">Cut through the noise. Discover strategies and support systems to cultivate clarity and mental peace.</p>
+                        </a>
+
+                        <a href="pages/living-lighter.html" class="link-card block p-6 rounded-xl shadow bg-white/40 backdrop-blur-sm text-left transition duration-500 ease-in-out hover:shadow-lg hover:scale-[1.03]">
+                            <h4 class="text-xl font-semibold mb-2 text-purple-700">Living Lighter</h4>
+                            <p class="text-gray-600">Embrace minimalism in your space and schedule. Learn how less truly becomes more.</p>
+                        </a>
+
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <footer class="py-6 px-4 sm:px-6 lg:px-8 mt-16 bg-white/20 backdrop-blur-sm">
+            <div class="container mx-auto text-center text-gray-500 text-sm">
+                &copy; 2025 Infinitely Simple Life. All rights reserved.
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Library Scripts -->
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="assets/js/home-enhancements.js"></script>
+
+</body>
+</html>
