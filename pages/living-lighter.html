@@ -11,29 +11,112 @@
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/animations.css">
     <style>
-        /* SVG styling */
-        .placeholder-svg {
-            width: 80%;
-            max-width: 150px;
-            height: auto;
-            margin: 1rem auto 1.5rem auto;
-            display: block;
-        }
+        /* SVG styling - Placeholder rule removed */
+
         .arrow {
             font-size: 2.5rem;
-            color: #60a5fa;
+            color: #60a5fa; /* Tailwind blue-400 */
             line-height: 1;
         }
-        /* Specific SVG colors */
+        /* Specific SVG colors - Kept in case SVGs are reintroduced */
         .svg-complexity path, .svg-complexity line, .svg-complexity circle {
-             stroke: #c2410c;
+             stroke: #c2410c; /* Tailwind orange-700 */
         }
         .svg-simplicity path, .svg-simplicity line, .svg-simplicity circle {
-             stroke: #15803d;
+             stroke: #15803d; /* Tailwind green-700 */
         }
+        /* Style for the result image */
+        .beach-img {
+             max-height: 300px; /* Limit height */
+             object-fit: cover; /* Ensure image covers space well */
+             width: 100%;
+        }
+        .contrast-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow */
+            /* Padding applied via utility classes */
+        }
+        /* Styles for Chaos to Order Dots */
+        .dots-flow-container {
+            position: relative;
+            height: 30px; /* Height to accommodate vertical scatter */
+            width: 90%;
+            margin: auto;
+            overflow: hidden; /* Hide dots when outside bounds if needed */
+        }
+
+        .dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #fdba74; /* Start with light orange */
+            border-radius: 50%;
+            opacity: 0; /* Start hidden */
+            /* Animation applied via nth-child */
+            animation-name: chaosToOrderFlow;
+            animation-duration: 3s; /* Total duration for one dot cycle */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes chaosToOrderFlow {
+            0% {
+                opacity: 0;
+                left: 5%;
+                /* Start scattered vertically */
+                top: calc(50% + var(--chaos-offset, 0px));
+                transform: translateY(-50%);
+                background-color: #fdba74; /* Orange */
+            }
+            15% {
+                opacity: 1;
+                 /* Still scattered */
+                top: calc(50% + var(--chaos-offset, 0px));
+                transform: translateY(-50%);
+            }
+            85% {
+                opacity: 1;
+                left: 95%;
+                /* Aligned vertically */
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: #86efac; /* End with light green */
+            }
+            100% {
+                opacity: 0;
+                left: 95%;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: #86efac;
+            }
+        }
+
+        /* Stagger animation delays and initial scatter */
+        .dot:nth-child(1) {
+            --chaos-offset: -6px;
+            animation-delay: 0s;
+        }
+        .dot:nth-child(2) {
+             --chaos-offset: 4px;
+             animation-delay: 0.3s;
+        }
+        .dot:nth-child(3) {
+             --chaos-offset: -3px;
+             animation-delay: 0.6s;
+        }
+        .dot:nth-child(4) {
+             --chaos-offset: 6px;
+             animation-delay: 0.9s;
+        }
+        .dot:nth-child(5) {
+             --chaos-offset: 0px;
+             animation-delay: 1.2s;
+        }
+
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-gray-50 text-gray-800 font-inter">
 
     <div class="flex flex-col min-h-screen">
 
@@ -56,24 +139,34 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-16">
-                <div class="contrast-card text-center p-6">
+                <!-- AI Maze Card -->
+                <div class="contrast-card text-center p-6 h-full flex flex-col justify-start">
                     <h3 class="text-2xl font-semibold mb-4 text-orange-600">The AI Maze</h3>
-                    <img src="../assets/images/the_ai_maze.png" alt="Illustration of a complex maze representing AI complexity" class="placeholder-svg">
+                    <img src="../assets/images/the_ai_maze.png" alt="Illustration of a complex maze representing AI complexity" class="w-3/4 mx-auto mb-6 rounded-lg">
                     <p class="text-gray-600 px-4">
                         Feeling lost in the rapid advance of AI? Struggling to integrate new tools effectively without adding more stress?
                     </p>
                 </div>
 
-                <div class="text-center hidden md:block">
-                    <span class="arrow">&rarr;</span>
+                <!-- Divider -->
+                <div class="text-center hidden md:flex md:items-center md:justify-center">
+                    <!-- Replaced gradient bar with dots container -->
+                    <div class="dots-flow-container">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
                 </div>
                  <div class="text-center md:hidden my-4">
                     <span class="arrow">&darr;</span>
                 </div>
 
-                <div class="contrast-card text-center p-6">
+                <!-- Simple Solution Card -->
+                <div class="contrast-card text-center p-6 h-full flex flex-col justify-start">
                      <h3 class="text-2xl font-semibold mb-4 text-green-600">The Simple Solution</h3>
-                     <img src="../assets/images/the_simple_solution.png" alt="Illustration of a simplified, elegant solution" class="placeholder-svg">
+                     <img src="../assets/images/the_simple_solution.png" alt="Illustration of a simplified, elegant solution" class="w-3/4 mx-auto mb-6 rounded-lg">
                     <p class="text-gray-600 px-4">
                         Imagine AI working *for* you, seamlessly simplifying tasks and enhancing focus. Technology becomes an invisible, effortless ally.
                     </p>
