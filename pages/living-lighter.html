@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Lighter - Infinitely Simple Life</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <style>
+        /* SVG styling - Placeholder rule removed */
+
+        .arrow {
+            font-size: 2.5rem;
+            color: #60a5fa; /* Tailwind blue-400 */
+            line-height: 1;
+        }
+        /* Specific SVG colors - Kept in case SVGs are reintroduced */
+        .svg-complexity path, .svg-complexity line, .svg-complexity circle {
+             stroke: #c2410c; /* Tailwind orange-700 */
+        }
+        .svg-simplicity path, .svg-simplicity line, .svg-simplicity circle {
+             stroke: #15803d; /* Tailwind green-700 */
+        }
+        /* Style for the result image */
+        .beach-img {
+             max-height: 300px; /* Limit height */
+             object-fit: cover; /* Ensure image covers space well */
+             width: 100%;
+        }
+        .contrast-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow */
+            /* Padding applied via utility classes */
+        }
+        /* Styles for Chaos to Order Dots */
+        .dots-flow-container {
+            position: relative;
+            height: 40px; /* Increased height for more scatter */
+            width: 90%;
+            margin: 20px auto 0 auto; /* Added top margin for symbol space */
+            overflow: hidden; /* Hide dots when outside bounds if needed */
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px; /* Increased size */
+            height: 10px; /* Increased size */
+            background-color: #fdba74; /* Start with light orange */
+            border-radius: 50%;
+            opacity: 0; /* Start hidden */
+            /* Animation applied via nth-child */
+            animation-name: chaosToOrderFlow;
+            animation-duration: 6s; /* Slowed down from 5s */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        @keyframes chaosToOrderFlow {
+            0% {
+                opacity: 0;
+                left: 5%;
+                /* Start scattered vertically */
+                top: calc(50% + var(--chaos-offset, 0px));
+                transform: translateY(-50%);
+                background-color: #fdba74; /* Orange */
+            }
+            15% {
+                opacity: 1;
+                 /* Still scattered */
+                top: calc(50% + var(--chaos-offset, 0px));
+                transform: translateY(-50%);
+            }
+            85% {
+                opacity: 1;
+                left: 95%;
+                /* Aligned vertically */
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: #86efac; /* End with light green */
+            }
+            100% {
+                opacity: 0;
+                left: 95%;
+                top: 50%;
+                transform: translateY(-50%);
+                background-color: #86efac;
+            }
+        }
+
+        /* Increased scatter range and staggered animation delays */
+        .dot:nth-child(1) {
+            --chaos-offset: -10px;
+            animation-delay: 0s;
+        }
+        .dot:nth-child(2) {
+             --chaos-offset: 8px;
+             animation-delay: 0.25s; /* Adjusted delays slightly */
+        }
+        .dot:nth-child(3) {
+             --chaos-offset: -5px;
+             animation-delay: 0.5s;
+        }
+        .dot:nth-child(4) {
+             --chaos-offset: 12px;
+             animation-delay: 0.75s;
+        }
+        .dot:nth-child(5) {
+             --chaos-offset: 2px;
+             animation-delay: 1.0s;
+        }
+
+        /* Styles for Chaos/Order Symbols */
+        .symbol-container {
+            position: relative; /* Container for absolute positioning */
+            height: 30px; /* Increased height slightly for scaling */
+            width: 90%;
+            margin: auto;
+            z-index: 1; /* Keep symbols above dots if they overlap slightly */
+        }
+        .symbol {
+            position: absolute;
+            top: 50%;
+            /* transform: translateY(-50%); No longer needed with origin */
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #9ca3af; /* gray-400 */
+            /* Animation applied below */
+            animation-duration: 6s; /* Slowed down from 5s, matches dots */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            transform-origin: center center; /* Ensure scaling is centered */
+            white-space: nowrap; /* Prevent wrapping during scale */
+        }
+        #chaos-symbol {
+            left: 5%;
+            /* opacity: 1; Defined in animation */
+            animation-name: fadeChaosOut;
+        }
+        #order-symbol {
+            right: 5%;
+            /* opacity: 0; Defined in animation */
+            animation-name: fadeOrderIn;
+        }
+
+        @keyframes fadeChaosOut {
+            /* Fade in, start large, shrink later, fade out late */
+            0%   { opacity: 0; transform: scale(1.3); }
+            15%  { opacity: 1; transform: scale(1.3); }
+            60%  { opacity: 1; transform: scale(1);   } /* Start fade out */
+            90%  { opacity: 0; transform: scale(1);   } /* Finish fade out */
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeOrderIn {
+            /* Stay hidden, fade in late and grow */
+            0%   { opacity: 0; transform: scale(1);   }
+            60%  { opacity: 0; transform: scale(1);   } /* Start fade in */
+            90%  { opacity: 1; transform: scale(1.3); } /* Finish fade in and grow */
+            100% { opacity: 1; transform: scale(1.3); }
+        }
+
+        /* Style for Transition Text */
+        #transition-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            font-size: 1.1rem; /* Slightly larger */
+            font-weight: 600; /* Semibold */
+            color: #4b5563; /* gray-600 */
+            opacity: 0;
+            transform-origin: center center;
+            white-space: nowrap;
+            z-index: 2; /* Ensure text is above symbols */
+            /* Animation applied via class */
+        }
+
+        #transition-text.affirmation-active {
+            /* Text animation duration increased, triggers via JS */
+            animation: gentleAffirmation 4s ease-in-out 0s 1 forwards;
+        }
+
+        @keyframes gentleAffirmation {
+            /* Longer hold time */
+            0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+            20%  { opacity: 1; transform: translate(-50%, -50%) scale(1);   } /* Fade in complete */
+            80%  { opacity: 1; transform: translate(-50%, -50%) scale(1);   } /* Hold until 80% */
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1);   } /* Fade out */
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-inter">
+
+    <div class="flex flex-col min-h-screen">
+
+        <header class="py-6 px-4 sm:px-6 lg:px-8 bg-white shadow-sm">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl font-semibold text-gray-700">
+                    <a href="../index.html" class="hover:text-blue-600">Infinitely Simple Life</a> / <span class="text-purple-700">Living Lighter</span>
+                </h1>
+                 <a href="../index.html" class="text-sm text-blue-500 hover:underline">&larr; Back to Home</a>
+            </div>
+        </header>
+
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+            <div class="text-center mb-12">
+                <h2 class="text-4xl sm:text-5xl font-bold text-purple-700 mb-3">Embrace Living Lighter</h2>
+                <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Swap complexity and overwhelm for clarity and calm. Discover how simplifying your relationship with technology unlocks a richer life.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-16">
+                <!-- AI Maze Card -->
+                <div class="contrast-card text-center p-6 h-full flex flex-col justify-start">
+                    <h3 class="text-2xl font-semibold mb-4 text-orange-600">The AI Maze</h3>
+                    <img src="../assets/images/the_ai_maze.png" alt="Illustration of a complex maze representing AI complexity" class="w-3/4 mx-auto mb-6 rounded-lg">
+                    <p class="text-gray-600 px-4">
+                        Feeling lost in the rapid advance of AI? Struggling to integrate new tools effectively without adding more stress?
+                    </p>
+                </div>
+
+                <!-- Divider -->
+                <div class="text-center hidden md:flex md:flex-col md:items-center md:justify-center relative"> <!-- Added relative positioning -->
+                     <!-- Transition Text -->
+                    <div id="transition-text">Clarity Found</div>
+                    <!-- Chaos/Order Symbols -->
+                    <div class="symbol-container">
+                        <div id="chaos-symbol" class="symbol">Chaos...</div>
+                        <div id="order-symbol" class="symbol">...Order</div>
+                    </div>
+                    <!-- Dots Container -->
+                    <div class="dots-flow-container">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+                 <div class="text-center md:hidden my-4">
+                    <span class="arrow">&darr;</span>
+                </div>
+
+                <!-- Simple Solution Card -->
+                <div class="contrast-card text-center p-6 h-full flex flex-col justify-start">
+                     <h3 class="text-2xl font-semibold mb-4 text-green-600">The Simple Solution</h3>
+                     <img src="../assets/images/the_simple_solution.png" alt="Illustration of a simplified, elegant solution" class="w-3/4 mx-auto mb-6 rounded-lg">
+                    <p class="text-gray-600 px-4">
+                        Imagine AI working *for* you, seamlessly simplifying tasks and enhancing focus. Technology becomes an invisible, effortless ally.
+                    </p>
+                </div>
+            </div>
+
+            <div class="text-center bg-gradient-to-r from-blue-50 to-cyan-50 p-8 rounded-xl shadow-inner mb-16">
+                 <h3 class="text-3xl font-semibold mb-6 text-blue-700">The Result: Freedom & Joy</h3>
+                 <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                    <img src="../assets/images/freedom-joy-01.png" alt="Person experiencing freedom and joy" class="beach-img rounded-lg md:w-1/2">
+                    <p class="text-lg text-gray-700 md:w-1/2 md:text-left">
+                        By simplifying how technology serves you, you create space – mentally and temporally. Space to breathe, pursue passions, connect, and simply *be*. Imagine trading tech stress for serenity, complexity for clarity. That's the power of living lighter.
+                    </p>
+                 </div>
+            </div>
+
+            <div class="text-center">
+                <h4 class="text-2xl font-semibold mb-4 text-gray-700">Ready to Simplify?</h4>
+                <p class="text-gray-600 mb-6">Explore practical steps and resources:</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#declutter" class="bg-purple-500 hover:bg-purple-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Declutter Your Digital Life</a>
+                    <a href="#schedule" class="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Simplify Your Workflow</a>
+                    <a href="#mindset" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Cultivate a Focused Mindset</a>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="py-6 px-4 sm:px-6 lg:px-8 mt-12 border-t border-gray-200">
+            <div class="container mx-auto text-center text-gray-500 text-sm">
+                 &copy; 2025 Infinitely Simple Life. All rights reserved. | <a href="../index.html" class="hover:underline">Back to Home</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const textElement = document.getElementById('transition-text');
+            const referenceDot = document.querySelector('.dots-flow-container .dot:first-child'); // Use first dot as reference
+
+            const affirmations = [
+                "Clarity Found",
+                "Simplicity Achieved",
+                "Focus Restored",
+                "Order from Chaos",
+                "Calm Emerges",
+                "Effortless Flow"
+            ];
+            let affirmationIndex = 0;
+            let isTextAnimating = false;
+
+            if (textElement && referenceDot && affirmations.length > 0) {
+
+                const triggerTextAnimation = () => {
+                    if (isTextAnimating) return; // Prevent overlapping triggers
+
+                    isTextAnimating = true;
+                    affirmationIndex = (affirmationIndex + 1) % affirmations.length;
+                    textElement.textContent = affirmations[affirmationIndex];
+
+                    // Ensure class is removed before adding it again for re-trigger
+                    textElement.classList.remove('affirmation-active');
+
+                    // Use requestAnimationFrame to ensure the class removal is processed
+                    requestAnimationFrame(() => {
+                         requestAnimationFrame(() => { // Double RAF for robustness
+                             textElement.classList.add('affirmation-active');
+                         });
+                    });
+
+                    // Reset flag after animation duration (4000ms)
+                    setTimeout(() => {
+                        isTextAnimating = false;
+                    }, 4000);
+                };
+
+                // Listener for when the dot animation completes an iteration
+                referenceDot.addEventListener('animationiteration', () => {
+                    // Trigger text slightly *before* the dots restart visually
+                    // to make the loop feel smoother.
+                    // Adjust timing if needed.
+                    setTimeout(triggerTextAnimation, 500); // Trigger 0.5s after iteration ends
+                });
+
+                // Trigger the first animation sequence shortly after page load
+                 // Use the previous index to show the first item initially
+                affirmationIndex = affirmations.length - 1; // Start before the first item
+                setTimeout(triggerTextAnimation, 1500); // Initial delay
+            }
+        });
+    </script>
+
+</body>
+</html>

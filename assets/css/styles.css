@@ -1,0 +1,34 @@
+/* Apply Inter font globally */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Style for link cards */
+.link-card {
+    background-color: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.link-card:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Additional shared styles */
+.contrast-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    padding-bottom: 1.5rem;
+}
+
+.beach-img {
+    object-fit: cover;
+    width: 100%;
+    height: 200px;
+    background-color: #e2e8f0;
+}
