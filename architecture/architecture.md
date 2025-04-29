@@ -32,6 +32,7 @@ The primary goal is to create a calming, engaging static website exploring theme
 |   |   |-- animations.css   # Gradient animation styles
 |   |-- js/
 |   |   |-- home-enhancements.js # JS for home.html (scroll reveal, fading text)
+|   |   |-- focus-enhancements.js # JS for clarity-focus.html (scroll reveal)
 |   |-- images/
 |       |-- (Site images, logos, generated assets)
 |-- docs/
@@ -50,6 +51,7 @@ The primary goal is to create a calming, engaging static website exploring theme
 *   **Homepage (`index.html`):** Simple entry point with animated gradient background and basic card styles.
 *   **Homepage Enhanced (`home.html`):** Variant using animated gradient, ScrollReveal animations, refined card hover effects, and a fading tagline effect.
 *   **Content Pages (`pages/`):** Dedicated pages for exploring sub-themes (Automation, Focus, Living Lighter).
+    *   `clarity-focus.html`: Enhanced with subtle arrow animation, hover effects on cultivation items, and scroll-reveal animations.
 *   **Styling:** Primarily Tailwind utility classes, minimal custom CSS.
 *   **Interactivity:** Subtle animations (hover effects, scroll reveals, fading text effect) to enhance engagement without overwhelming.
 

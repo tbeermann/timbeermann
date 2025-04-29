@@ -18,9 +18,63 @@
             margin: 0 auto 1rem auto; /* Center and add bottom margin */
             color: #0d9488; /* Teal-600 */
         }
+
+        /* Placeholder styles for image effects */
+        .murky-effect {
+            /* Future styles for overlay/animation */
+            position: relative; /* Needed for potential overlays */
+        }
+        .still-effect {
+             /* Future styles for shimmer/animation */
+             position: relative;
+        }
+
+        /* Divider arrow animation */
+        .divider-arrow {
+             animation: subtlePulse 2.5s ease-in-out infinite;
+        }
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        /* Hover effect for cultivation items */
+        .cultivation-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            background-color: rgba(255, 255, 255, 0.6); /* Slightly lighter background on hover */
+        }
+        .cultivation-item {
+             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+             background-color: rgba(255, 255, 255, 0.4);
+             border-radius: 0.5rem; /* rounded-lg */
+             cursor: pointer; /* Add pointer cursor for feedback */
+        }
+
+        /* Base card style (if different from living-lighter) */
+        .contrast-card {
+            background-color: white;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow */
+            height: 100%; /* Ensure cards match height */
+        }
+        .placeholder-img-concept {
+            width: 80%;
+            max-width: 250px; /* Allow slightly larger placeholders */
+            height: auto;
+            margin: 1rem auto 1.5rem auto;
+            display: block;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .arrow-large {
+            font-size: 3rem;
+            color: #a3a3a3; /* neutral-400 */
+            line-height: 1;
+        }
+
     </style>
 </head>
-<body class="text-gray-800">
+<body class="bg-gray-50 text-gray-800 font-inter">
 
     <div class="flex flex-col min-h-screen">
 
@@ -42,22 +96,22 @@
                 </p>
             </div>
 
-            <section class="mb-16">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+            <section class="mb-16" id="comparison-section">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
 
-                    <div class="contrast-card text-center p-6">
+                    <div class="contrast-card text-center p-6 murky-effect">
                         <h3 class="text-2xl font-semibold mb-4 text-orange-600">The Murky Mind</h3>
                         <img src="https://placehold.co/400x300/fed7aa/9a3412?text=Murky+Water" alt="Illustration of a murky, disturbed pond" class="placeholder-img-concept" onerror="this.src='https://placehold.co/400x300/fed7aa/9a3412?text=Mental+Clutter'; this.onerror=null;">
                         <p class="text-gray-600">Thoughts racing, attention scattered by notifications and mental noise. Clarity is lost in the constant churn.</p>
                     </div>
 
-                    <div class="text-center hidden md:block">
-                        <span class="arrow-large">&rarr;</span>
+                    <div class="text-center hidden md:flex md:items-center md:justify-center">
+                        <span class="arrow-large divider-arrow">&rarr;</span>
                     </div>
-                    <div class="text-center md:hidden my-6"> <span class="arrow-large">&darr;</span>
+                    <div class="text-center md:hidden my-6"> <span class="arrow-large divider-arrow">&darr;</span>
                     </div>
 
-                    <div class="contrast-card text-center p-6">
+                    <div class="contrast-card text-center p-6 still-effect">
                         <h3 class="text-2xl font-semibold mb-4 text-sky-600">The Still Pond</h3>
                         <img src="https://placehold.co/400x300/bae6fd/0369a1?text=Clear+Reflection" alt="Illustration of a calm, still pond reflecting the sky" class="placeholder-img-concept" onerror="this.src='https://placehold.co/400x300/bae6fd/0369a1?text=Clear+Focus'; this.onerror=null;">
                         <p class="text-gray-600">A calm, clear mind reflecting reality without distortion. Focus comes naturally, allowing deep work and presence.</p>
@@ -65,22 +119,22 @@
                 </div>
             </section>
 
-            <section class="bg-gradient-to-br from-emerald-50 to-teal-100 p-8 md:p-12 rounded-xl shadow-inner mb-16">
+            <section class="bg-gradient-to-br from-emerald-50 to-teal-100 p-8 md:p-12 rounded-xl shadow-inner mb-16" id="cultivation-section">
                 <h3 class="text-3xl font-semibold text-center text-gray-800 mb-8">Cultivating Your Inner Stillness</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="text-center p-4">
+                    <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6 6 6 0 0 0-6-6m-4.714 1.054a5.98 5.98 0 0 1 8.378 8.43M3.75 8.25a5.98 5.98 0 0 1 8.43-8.378m1.054 4.714a6 6 0 0 1-6 6 6 6 0 0 1-6-6" /> </svg>
                         <h4 class="text-xl font-semibold mb-2 text-gray-700">Practice Presence</h4>
                         <p class="text-gray-600">Engage in mindfulness techniques to anchor yourself in the present moment, observing thoughts without judgment.</p>
                     </div>
-                    <div class="text-center p-4">
+                    <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /> </svg>
                         <h4 class="text-xl font-semibold mb-2 text-gray-700">Minimize Distractions</h4>
                         <p class="text-gray-600">Curate your digital environment. Turn off non-essential notifications and create dedicated focus time.</p>
                     </div>
-                    <div class="text-center p-4">
+                    <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /> </svg>
                         <h4 class="text-xl font-semibold mb-2 text-gray-700">Shape Your Space</h4>
@@ -89,7 +143,7 @@
                 </div>
             </section>
 
-            <div class="text-center">
+            <div class="text-center" id="cta-section">
                 <h4 class="text-2xl font-semibold mb-4 text-gray-700">Ready to Find Your Focus?</h4>
                 <p class="text-gray-600 mb-6">Explore techniques and resources to cultivate clarity:</p>
                 <div class="flex flex-wrap justify-center gap-4">
@@ -108,6 +162,9 @@
         </footer>
 
     </div>
+
+    <script src="https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js"></script>
+    <script src="../assets/js/focus-enhancements.js"></script>
 
 </body>
 </html>
