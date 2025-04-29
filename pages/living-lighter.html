@@ -40,16 +40,16 @@
         /* Styles for Chaos to Order Dots */
         .dots-flow-container {
             position: relative;
-            height: 30px; /* Height to accommodate vertical scatter */
+            height: 40px; /* Increased height for more scatter */
             width: 90%;
-            margin: auto;
+            margin: 20px auto 0 auto; /* Added top margin for symbol space */
             overflow: hidden; /* Hide dots when outside bounds if needed */
         }
 
         .dot {
             position: absolute;
-            width: 8px;
-            height: 8px;
+            width: 10px; /* Increased size */
+            height: 10px; /* Increased size */
             background-color: #fdba74; /* Start with light orange */
             border-radius: 50%;
             opacity: 0; /* Start hidden */
@@ -92,26 +92,70 @@
             }
         }
 
-        /* Stagger animation delays and initial scatter */
+        /* Increased scatter range and staggered animation delays */
         .dot:nth-child(1) {
-            --chaos-offset: -6px;
+            --chaos-offset: -10px;
             animation-delay: 0s;
         }
         .dot:nth-child(2) {
-             --chaos-offset: 4px;
-             animation-delay: 0.3s;
+             --chaos-offset: 8px;
+             animation-delay: 0.25s; /* Adjusted delays slightly */
         }
         .dot:nth-child(3) {
-             --chaos-offset: -3px;
-             animation-delay: 0.6s;
+             --chaos-offset: -5px;
+             animation-delay: 0.5s;
         }
         .dot:nth-child(4) {
-             --chaos-offset: 6px;
-             animation-delay: 0.9s;
+             --chaos-offset: 12px;
+             animation-delay: 0.75s;
         }
         .dot:nth-child(5) {
-             --chaos-offset: 0px;
-             animation-delay: 1.2s;
+             --chaos-offset: 2px;
+             animation-delay: 1.0s;
+        }
+
+        /* Styles for Chaos/Order Symbols */
+        .symbol-container {
+            position: relative; /* Container for absolute positioning */
+            height: 25px; /* Space for symbols */
+            width: 90%;
+            margin: auto;
+        }
+        .symbol {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #9ca3af; /* gray-400 */
+            /* Animation applied below */
+            animation-duration: 3s; /* Match dot cycle */
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        #chaos-symbol {
+            left: 5%;
+            opacity: 1;
+            animation-name: fadeChaosOut;
+        }
+        #order-symbol {
+            right: 5%;
+            opacity: 0; /* Start hidden */
+            animation-name: fadeOrderIn;
+        }
+
+        @keyframes fadeChaosOut {
+            0% { opacity: 1; }
+            20% { opacity: 1; }
+            40% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeOrderIn {
+            0% { opacity: 0; }
+            70% { opacity: 0; }
+            90% { opacity: 1; }
+            100% { opacity: 1; }
         }
 
     </style>
@@ -149,8 +193,13 @@
                 </div>
 
                 <!-- Divider -->
-                <div class="text-center hidden md:flex md:items-center md:justify-center">
-                    <!-- Replaced gradient bar with dots container -->
+                <div class="text-center hidden md:flex md:flex-col md:items-center md:justify-center"> <!-- Changed to flex-col -->
+                    <!-- Chaos/Order Symbols -->
+                    <div class="symbol-container">
+                        <div id="chaos-symbol" class="symbol">Chaos...</div>
+                        <div id="order-symbol" class="symbol">...Order</div>
+                    </div>
+                    <!-- Dots Container -->
                     <div class="dots-flow-container">
                         <span class="dot"></span>
                         <span class="dot"></span>
