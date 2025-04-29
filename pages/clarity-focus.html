@@ -58,18 +58,165 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow */
             height: 100%; /* Ensure cards match height */
         }
-        .placeholder-img-concept {
-            width: 80%;
-            max-width: 250px; /* Allow slightly larger placeholders */
-            height: auto;
-            margin: 1rem auto 1.5rem auto;
-            display: block;
-            border-radius: 0.5rem; /* rounded-lg */
-        }
         .arrow-large {
             font-size: 3rem;
             color: #a3a3a3; /* neutral-400 */
             line-height: 1;
+        }
+
+        /* Styles for Transition Icons */
+        #icon-transition-container {
+            position: relative;
+            height: 60px; /* Adjust as needed */
+            width: 100%;
+        }
+        .transition-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.5s ease-in-out; /* For smooth JS control if needed */
+        }
+        .transition-icon svg {
+            width: 40px; /* Adjust size */
+            height: 40px;
+            color: #0d9488; /* Teal-600 */
+        }
+
+        /* Active state triggers animation */
+        .transition-icon.active {
+             animation: fadeInPulseFadeOut 2.5s ease-in-out 1 forwards;
+             /* Duration, timing, iterations, fill-mode */
+        }
+
+        @keyframes fadeInPulseFadeOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); } /* Subtle pulse */
+            70% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+
+        /* Mindfulness Journey Path Styles */
+        #mindfulness-journey-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            min-height: 300px;
+            overflow: hidden;
+        }
+
+        /* Flowing Animation */
+        @keyframes flowAnimation {
+            0% {
+                stroke-dashoffset: 200;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        #journey-path {
+            stroke-dasharray: 200;
+            animation: flowAnimation 15s linear infinite;
+        }
+
+        .journey-point {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .journey-point:hover {
+            transform: translate(-50%, -50%) scale(1.15);
+        }
+
+        .journey-icon-container {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0d9488; /* Teal-600 to match other icons */
+        }
+
+        .journey-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            color: #374151; /* Gray-700 */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        .journey-description {
+            position: absolute;
+            width: 150px;
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+            pointer-events: none;
+            z-index: 20;
+            left: 50%;
+            transform: translateX(-50%);
+            top: calc(100% + 5px);
+        }
+
+        .journey-point:hover .journey-description {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) translateX(-50%);
+        }
+
+        /* Ripple Effect Styles */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: rippleEffect 2s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            0% {
+                transform: scale(0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Adaptations */
+        @media (max-width: 767px) {
+            .mobile-journey-point {
+                margin: 1rem 0;
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+            
+            .mobile-journey-icon {
+                margin-right: 1rem;
+            }
+            
+            .mobile-journey-text {
+                text-align: left;
+            }
         }
 
     </style>
@@ -90,66 +237,165 @@
         <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
             <div class="text-center mb-12">
-                <h2 class="text-4xl sm:text-5xl font-bold text-teal-700 mb-3">Discover the Clarity of Stillness</h2>
+                <h2 class="text-4xl sm:text-5xl font-bold text-teal-700 mb-3">Discover the Power of AI Focus</h2>
                 <p class="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-                    Like a pond reflecting a clear sky, find mental peace and sharp focus by calming the ripples of distraction in your mind.
+                    Like a skilled assistant, AI tools can transform your chaotic workflow into a clear, focused system that enhances productivity and reduces cognitive load.
                 </p>
             </div>
 
             <section class="mb-16" id="comparison-section">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
 
-                    <div class="contrast-card text-center p-6 murky-effect">
-                        <h3 class="text-2xl font-semibold mb-4 text-orange-600">The Murky Mind</h3>
-                        <img src="https://placehold.co/400x300/fed7aa/9a3412?text=Murky+Water" alt="Illustration of a murky, disturbed pond" class="placeholder-img-concept" onerror="this.src='https://placehold.co/400x300/fed7aa/9a3412?text=Mental+Clutter'; this.onerror=null;">
-                        <p class="text-gray-600">Thoughts racing, attention scattered by notifications and mental noise. Clarity is lost in the constant churn.</p>
+                    <div class="contrast-card text-center p-6 murky-effect" id="murky-mind-card">
+                        <h3 class="text-2xl font-semibold mb-4 text-orange-600">Information Overload</h3>
+                        <img src="../assets/images/murky-water.png" alt="Murky pond water with ripples" class="w-3/4 mx-auto mb-6 rounded-lg" id="murky-mind-image">
+                        <p class="text-gray-600">Drowning in emails, notifications, and competing priorities. Important tasks get lost in the constant information churn.</p>
                     </div>
 
-                    <div class="text-center hidden md:flex md:items-center md:justify-center">
-                        <span class="arrow-large divider-arrow">&rarr;</span>
+                    <div class="text-center hidden md:flex md:items-center md:justify-center" id="transition-section">
+                        <div id="mindfulness-journey-container" class="relative w-full h-full min-h-[300px]">
+                            <!-- SVG Path Background -->
+                            <svg id="journey-path-svg" class="absolute w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
+                                <defs>
+                                    <linearGradient id="journey-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#f97316" /> <!-- Orange-500 for chaotic -->
+                                        <stop offset="100%" stop-color="#0ea5e9" /> <!-- Sky-500 for focused -->
+                                    </linearGradient>
+                                </defs>
+                                <path id="journey-path" d="M0,50 C60,70 120,30 180,50 C240,70 300,40 300,50" stroke="url(#journey-gradient)" stroke-width="10" fill="none" stroke-linecap="round" />
+                            </svg>
+                            
+                            <!-- AI Workflow Points -->
+                            <div class="journey-point" id="input-point" data-step="1" style="top: 50%; left: 10%;">
+                                <div class="journey-icon-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                    </svg>
+                                </div>
+                                <span class="journey-label">Input</span>
+                                <div class="journey-description">Chaotic information from multiple sources</div>
+                            </div>
+                            
+                            <div class="journey-point" id="process-point" data-step="2" style="top: 35%; left: 30%;">
+                                <div class="journey-icon-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 1-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                                    </svg>
+                                </div>
+                                <span class="journey-label">AI Processing</span>
+                                <div class="journey-description">Smart algorithms filter and prioritize</div>
+                            </div>
+                            
+                            <div class="journey-point" id="automate-point" data-step="3" style="top: 60%; left: 50%;">
+                                <div class="journey-icon-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                    </svg>
+                                </div>
+                                <span class="journey-label">Automation</span>
+                                <div class="journey-description">Repetitive tasks handled automatically</div>
+                            </div>
+                            
+                            <div class="journey-point" id="insight-point" data-step="4" style="top: 40%; left: 70%;">
+                                <div class="journey-icon-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+                                    </svg>
+                                </div>
+                                <span class="journey-label">Insights</span>
+                                <div class="journey-description">Actionable intelligence from your data</div>
+                            </div>
+                            
+                            <div class="journey-point" id="productivity-point" data-step="5" style="top: 50%; left: 90%;">
+                                <div class="journey-icon-container">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75l1.5 1.5m-.75-1.5h.75m-.75 3h.75m-.75 3h.75m3-6l1.5 1.5m-.75-1.5h.75m-.75 3h.75m-.75 3h.75M6.75 17.25h.75m-.75 3h.75m2.25-3h.75m-.75 3h.75" />
+                                    </svg>
+                                </div>
+                                <span class="journey-label">Productivity</span>
+                                <div class="journey-description">Enhanced focus and efficient workflows</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-center md:hidden my-6"> <span class="arrow-large divider-arrow">&darr;</span>
+                    <div class="text-center md:hidden my-6" id="mobile-journey-container"> 
+                        <div class="relative py-2">
+                            <div class="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-orange-400 to-sky-400 transform -translate-y-1/2"></div>
+                            
+                            <div class="mobile-journey-steps flex justify-between items-center">
+                                <div class="mobile-journey-step" data-step="1">
+                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-xs mt-2 font-medium">Input</p>
+                                </div>
+                                <div class="mobile-journey-step" data-step="3">
+                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-xs mt-2 font-medium">Automation</p>
+                                </div>
+                                <div class="mobile-journey-step" data-step="5">
+                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 6.75l3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
+                                        </svg>
+                                    </div>
+                                    <p class="text-xs mt-2 font-medium">Productivity</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 text-center text-sm text-gray-600">
+                                <p>Transform chaotic information into focused productivity with AI</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="contrast-card text-center p-6 still-effect">
-                        <h3 class="text-2xl font-semibold mb-4 text-sky-600">The Still Pond</h3>
-                        <img src="https://placehold.co/400x300/bae6fd/0369a1?text=Clear+Reflection" alt="Illustration of a calm, still pond reflecting the sky" class="placeholder-img-concept" onerror="this.src='https://placehold.co/400x300/bae6fd/0369a1?text=Clear+Focus'; this.onerror=null;">
-                        <p class="text-gray-600">A calm, clear mind reflecting reality without distortion. Focus comes naturally, allowing deep work and presence.</p>
+                    <div class="contrast-card text-center p-6 still-effect" id="still-pond-card">
+                        <h3 class="text-2xl font-semibold mb-4 text-sky-600">AI-Enhanced Clarity</h3>
+                        <img src="../assets/images/clear-reflection.png" alt="Clear water reflecting blue sky and clouds" class="w-3/4 mx-auto mb-6 rounded-lg" id="still-pond-image">
+                        <p class="text-gray-600">Streamlined workflow where AI intelligently organizes, prioritizes, and automates. Focus comes naturally, allowing deep work on what truly matters.</p>
                     </div>
                 </div>
             </section>
 
             <section class="bg-gradient-to-br from-emerald-50 to-teal-100 p-8 md:p-12 rounded-xl shadow-inner mb-16" id="cultivation-section">
-                <h3 class="text-3xl font-semibold text-center text-gray-800 mb-8">Cultivating Your Inner Stillness</h3>
+                <h3 class="text-3xl font-semibold text-center text-gray-800 mb-8">Implementing AI-Powered Focus</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                     <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18.75a6 6 0 0 0 6-6 6 6 0 0 0-6-6m-4.714 1.054a5.98 5.98 0 0 1 8.378 8.43M3.75 8.25a5.98 5.98 0 0 1 8.43-8.378m1.054 4.714a6 6 0 0 1-6 6 6 6 0 0 1-6-6" /> </svg>
-                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Practice Presence</h4>
-                        <p class="text-gray-600">Engage in mindfulness techniques to anchor yourself in the present moment, observing thoughts without judgment.</p>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Smart Prioritization</h4>
+                        <p class="text-gray-600">Leverage AI assistants to analyze your tasks and surface what's most important, reducing decision fatigue.</p>
                     </div>
                     <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /> </svg>
-                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Minimize Distractions</h4>
-                        <p class="text-gray-600">Curate your digital environment. Turn off non-essential notifications and create dedicated focus time.</p>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Intelligent Filtering</h4>
+                        <p class="text-gray-600">Deploy AI tools that analyze, categorize and filter information, protecting your attention for high-value work.</p>
                     </div>
                     <div class="cultivation-item text-center p-4">
                         <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /> </svg>
-                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Shape Your Space</h4>
-                        <p class="text-gray-600">Design your physical workspace to support focus, minimizing clutter and creating a calm atmosphere.</p>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                        </svg>
+                        <h4 class="text-xl font-semibold mb-2 text-gray-700">Workflow Automation</h4>
+                        <p class="text-gray-600">Automate repetitive tasks with AI workflows, freeing your cognitive resources for creative and strategic thinking.</p>
                     </div>
                 </div>
             </section>
 
             <div class="text-center" id="cta-section">
-                <h4 class="text-2xl font-semibold mb-4 text-gray-700">Ready to Find Your Focus?</h4>
-                <p class="text-gray-600 mb-6">Explore techniques and resources to cultivate clarity:</p>
+                <h4 class="text-2xl font-semibold mb-4 text-gray-700">Ready to Enhance Your Productivity?</h4>
+                <p class="text-gray-600 mb-6">Explore our AI solutions to streamline your workflow:</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="#mindfulness" class="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Mindfulness Practices</a>
-                    <a href="#digital_detox" class="bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Digital Declutter Tips</a>
-                    <a href="#environment" class="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Focus-Friendly Spaces</a>
+                    <a href="#ai_assistants" class="bg-teal-500 hover:bg-teal-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">AI Assistant Solutions</a>
+                    <a href="#automation" class="bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Workflow Automation</a>
+                    <a href="#integration" class="bg-sky-500 hover:bg-sky-600 text-white font-medium py-2 px-5 rounded-lg transition duration-300">Enterprise Integration</a>
                 </div>
             </div>
 

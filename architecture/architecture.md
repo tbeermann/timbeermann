@@ -68,4 +68,27 @@ The primary goal is to create a calming, engaging static website exploring theme
 *   Integration of AI-generated imagery.
 *   Potential for more complex interactive elements (if needed).
 *   Refinement of color palettes and typography.
+*   Content Management System (CMS) integration if content becomes dynamic or frequently updated (though aiming for static initially).
+
+## 7. Mindfulness Journey Visualization
+
+Located in the Clarity & Focus page, this component visualizes the path from distraction to presence:
+
+1. **SVG Path**: A gradient-colored flowing path from "murky mind" to "still pond"
+2. **Interactive Touch Points**: Five stages of the mindfulness journey:
+   - Awareness: Recognizing thought patterns
+   - Breath: Using breath as an anchor
+   - Letting Go: Releasing distractions
+   - Presence: Being in the moment
+   - Clarity: Achieving mental stillness
+
+3. **Visual Effects**:
+   - Flowing animation on the path
+   - Ripple effects that appear along the journey
+   - Hover interactions with descriptive tooltips
+   
+4. **Mobile Adaptation**:
+   - Simplified vertical timeline for smaller screens
+   - Three key journey points with descriptive text
+
 *   Content Management System (CMS) integration if content becomes dynamic or frequently updated (though aiming for static initially). 
