@@ -219,6 +219,185 @@
             }
         }
 
+        /* Digital Decluttering Cascade Styles */
+        #digital-cascade-container {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            min-height: 300px;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(255,237,213,0.3), rgba(224,242,254,0.3)); /* Orange-50 to Sky-50 with transparency */
+            border-radius: 1rem;
+        }
+
+        .digital-element {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transform-origin: center;
+            top: -60px;
+            opacity: 0.95;
+            z-index: 1;
+        }
+
+        /* Element types with distinct colors */
+        .element-email {
+            background-color: #f97316; /* Orange-500 */
+        }
+
+        .element-document {
+            background-color: #f59e0b; /* Amber-500 */
+        }
+
+        .element-task {
+            background-color: #ef4444; /* Red-500 */
+        }
+
+        .element-notification {
+            background-color: #ec4899; /* Pink-500 */
+        }
+
+        .element-meeting {
+            background-color: #8b5cf6; /* Violet-500 */
+        }
+
+        /* AI processing node */
+        .ai-node {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(20, 184, 166, 0.15); /* Teal-500 with transparency */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+
+        .ai-node-inner {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(20, 184, 166, 0.85);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.5);
+        }
+
+        .ai-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: rgba(20, 184, 166, 0.3);
+            animation: aiPulse 2s ease-out infinite;
+        }
+
+        @keyframes aiPulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+
+        /* Organized element animations */
+        .element-organized {
+            background-color: #0ea5e9; /* Sky-500 */
+            animation: none !important;
+            transition: all 0.5s ease-out;
+        }
+
+        .priority-high {
+            border: 2px solid #22c55e; /* Green-500 */
+            transform: scale(1.1);
+            z-index: 3;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.3);
+        }
+
+        .priority-medium {
+            border: 1px solid #22c55e; /* Green-500 */
+        }
+
+        .priority-low {
+            opacity: 0.5;
+        }
+
+        /* Animation for chaotic elements */
+        @keyframes chaoticFall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(25vh) rotate(5deg) translateX(10px);
+            }
+            50% {
+                transform: translateY(50vh) rotate(-5deg) translateX(-15px);
+            }
+            75% {
+                transform: translateY(75vh) rotate(8deg) translateX(5px);
+            }
+            100% {
+                transform: translateY(100vh) rotate(-3deg) translateX(-10px);
+            }
+        }
+
+        /* Animation for organized elements */
+        @keyframes organizedFall {
+            0% {
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                transform: translateY(100vh) translateX(0);
+            }
+        }
+
+        /* Mobile adaptations for the digital cascade */
+        @media (max-width: 767px) {
+            .mobile-cascade-container {
+                height: 200px;
+                position: relative;
+                overflow: hidden;
+                background: linear-gradient(to bottom, rgba(255,237,213,0.3), rgba(224,242,254,0.3));
+                border-radius: 0.75rem;
+                margin: 1rem 0;
+            }
+            
+            .mobile-ai-indicator {
+                text-align: center;
+                padding: 0.5rem;
+                background-color: rgba(20, 184, 166, 0.1);
+                border-radius: 0.5rem;
+                margin-top: 0.5rem;
+            }
+            
+            .mobile-ai-indicator svg {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 0.25rem;
+            }
+        }
+
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-inter">
@@ -253,105 +432,34 @@
                     </div>
 
                     <div class="text-center hidden md:flex md:items-center md:justify-center" id="transition-section">
-                        <div id="mindfulness-journey-container" class="relative w-full h-full min-h-[300px]">
-                            <!-- SVG Path Background -->
-                            <svg id="journey-path-svg" class="absolute w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
-                                <defs>
-                                    <linearGradient id="journey-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                        <stop offset="0%" stop-color="#f97316" /> <!-- Orange-500 for chaotic -->
-                                        <stop offset="100%" stop-color="#0ea5e9" /> <!-- Sky-500 for focused -->
-                                    </linearGradient>
-                                </defs>
-                                <path id="journey-path" d="M0,50 C60,70 120,30 180,50 C240,70 300,40 300,50" stroke="url(#journey-gradient)" stroke-width="10" fill="none" stroke-linecap="round" />
-                            </svg>
-                            
-                            <!-- AI Workflow Points -->
-                            <div class="journey-point" id="input-point" data-step="1" style="top: 50%; left: 10%;">
-                                <div class="journey-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                                    </svg>
-                                </div>
-                                <span class="journey-label">Input</span>
-                                <div class="journey-description">Chaotic information from multiple sources</div>
-                            </div>
-                            
-                            <div class="journey-point" id="process-point" data-step="2" style="top: 35%; left: 30%;">
-                                <div class="journey-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <div id="digital-cascade-container" class="relative w-full h-full min-h-[300px]">
+                            <!-- AI Processing Node -->
+                            <div class="ai-node">
+                                <div class="ai-pulse"></div>
+                                <div class="ai-node-inner">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 1-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
                                     </svg>
                                 </div>
-                                <span class="journey-label">AI Processing</span>
-                                <div class="journey-description">Smart algorithms filter and prioritize</div>
                             </div>
                             
-                            <div class="journey-point" id="automate-point" data-step="3" style="top: 60%; left: 50%;">
-                                <div class="journey-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                                    </svg>
-                                </div>
-                                <span class="journey-label">Automation</span>
-                                <div class="journey-description">Repetitive tasks handled automatically</div>
-                            </div>
-                            
-                            <div class="journey-point" id="insight-point" data-step="4" style="top: 40%; left: 70%;">
-                                <div class="journey-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
-                                    </svg>
-                                </div>
-                                <span class="journey-label">Insights</span>
-                                <div class="journey-description">Actionable intelligence from your data</div>
-                            </div>
-                            
-                            <div class="journey-point" id="productivity-point" data-step="5" style="top: 50%; left: 90%;">
-                                <div class="journey-icon-container">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75l1.5 1.5m-.75-1.5h.75m-.75 3h.75m-.75 3h.75m3-6l1.5 1.5m-.75-1.5h.75m-.75 3h.75m-.75 3h.75M6.75 17.25h.75m-.75 3h.75m2.25-3h.75m-.75 3h.75" />
-                                    </svg>
-                                </div>
-                                <span class="journey-label">Productivity</span>
-                                <div class="journey-description">Enhanced focus and efficient workflows</div>
-                            </div>
+                            <!-- The digital elements will be created and animated by JavaScript -->
                         </div>
                     </div>
-                    <div class="text-center md:hidden my-6" id="mobile-journey-container"> 
-                        <div class="relative py-2">
-                            <div class="absolute left-0 right-0 top-1/2 h-1 bg-gradient-to-r from-orange-400 to-sky-400 transform -translate-y-1/2"></div>
-                            
-                            <div class="mobile-journey-steps flex justify-between items-center">
-                                <div class="mobile-journey-step" data-step="1">
-                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                                        </svg>
-                                    </div>
-                                    <p class="text-xs mt-2 font-medium">Input</p>
-                                </div>
-                                <div class="mobile-journey-step" data-step="3">
-                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                                        </svg>
-                                    </div>
-                                    <p class="text-xs mt-2 font-medium">Automation</p>
-                                </div>
-                                <div class="mobile-journey-step" data-step="5">
-                                    <div class="mobile-journey-icon bg-white p-2 rounded-full shadow-md z-10">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-teal-600">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 6.75l3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605" />
-                                        </svg>
-                                    </div>
-                                    <p class="text-xs mt-2 font-medium">Productivity</p>
-                                </div>
+                    <div class="text-center md:hidden my-6" id="mobile-journey-container">
+                        <div class="mobile-cascade-container">
+                            <!-- Mobile cascade visualization -->
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-teal-500 rounded-full p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-white">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 1-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                                </svg>
                             </div>
-                            
-                            <div class="mt-6 text-center text-sm text-gray-600">
-                                <p>Transform chaotic information into focused productivity with AI</p>
-                            </div>
+                        </div>
+                        <div class="mobile-ai-indicator">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-teal-600">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+                            </svg>
+                            <span class="text-sm font-medium text-teal-700">AI organizing information in real-time</span>
                         </div>
                     </div>
 
